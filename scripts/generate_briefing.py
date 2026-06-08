@@ -68,11 +68,11 @@ def fetch_weather():
 
 def fetch_projects():
     records = at_get("tblWFC88Q9a3Egx89", {
-        "filterByFormula": f"AND(OR({{Status}}='Active Live',{{Status}}='Planning'),FIND('{CMM_ACCOUNT_ID}',ARRAYJOIN({{Account}})))",
-        "fields[]": ["Project_Name", "Status", "End_Date"],
+        "filterByFormula": "OR({Status}='Active Live',{Status}='Planning')",
+        "fields[]": ["Project_Name", "Status", "End_Date", "Account"],
         "sort[0][field]": "End_Date",
         "sort[0][direction]": "asc",
-        "maxRecords": 20
+        "maxRecords": 25
     })
     return records
 
