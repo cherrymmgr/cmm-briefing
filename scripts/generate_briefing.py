@@ -153,8 +153,12 @@ def build_html(weather, projects, tasks):
         rows = ""
         for r in projects:
             f = r.get("fields", {})
+            rec_id = r.get("id", "")
+            url = f"https://airtable.com/{BASE_ID}/tblWFC88Q9a3Egx89/{rec_id}"
+            name = f.get('Project_Name', '—')
+            link = f'<a href="{url}" target="_blank" style="color:#1a1a1a;text-decoration:none;font-weight:500;" onmouseover="this.style.color=\'#C0392B\'" onmouseout="this.style.color=\'#1a1a1a\'">{name}</a>'
             rows += f"""<tr>
-              <td style="padding:8px 12px;">{f.get('Project_Name','—')}</td>
+              <td style="padding:8px 12px;">{link}</td>
               <td style="padding:8px 12px;">{status_badge(f.get('Status','?'))}</td>
               <td style="padding:8px 12px;text-align:right;">{fmt_date(f.get('End_Date',''))}</td>
             </tr>"""
@@ -178,8 +182,12 @@ def build_html(weather, projects, tasks):
         rows = ""
         for r in tasks:
             f = r.get("fields", {})
+            rec_id = r.get("id", "")
+            url = f"https://airtable.com/{BASE_ID}/tblMqUxBOH6nznSzj/{rec_id}"
+            name = f.get('Name', '—')[:70]
+            link = f'<a href="{url}" target="_blank" style="color:#1a1a1a;text-decoration:none;" onmouseover="this.style.color=\'#C0392B\'" onmouseout="this.style.color=\'#1a1a1a\'">{name}</a>'
             rows += f"""<tr style="border-bottom:1px solid #f5f5f5;">
-              <td style="padding:7px 12px;font-size:13px;">{f.get('Name','—')[:70]}</td>
+              <td style="padding:7px 12px;font-size:13px;">{link}</td>
               <td style="padding:7px 12px;">{status_badge(f.get('Status','?'))}</td>
               <td style="padding:7px 12px;font-size:12px;text-align:right;">{fmt_date(f.get('End_Date',''))}</td>
             </tr>"""
